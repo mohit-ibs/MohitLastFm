@@ -39,6 +39,12 @@ class ViewController: UIViewController {
             albumDetailsView.albumModel = albumModel
         }
     }
+    
+    func showErrorMessage(message:String)  {
+        let alert = UIAlertController(title: "Message", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 extension ViewController: UISearchBarDelegate {
@@ -51,7 +57,7 @@ extension ViewController: UISearchBarDelegate {
                 self.tableView.reloadData()
             }) {[unowned self] (errorMessage) in
                 self.activityIndicator.stopAnimating()
-                print(errorMessage)
+                self.showErrorMessage(message: errorMessage)
             }
         }
         searchBar.resignFirstResponder()
